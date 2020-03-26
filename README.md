@@ -11,7 +11,7 @@ Exersise reminder
 news updates on COVID
 
 
-# The Isolation Companion!
+# The Isolation Companion! (* ^ ω ^)
 
 Being alone in a crisis can be taxing, especially when you're trapped in your own home! We created this application to keep you fit, motivated and updated, as well as reducing the overwhelming sense of loneliness!
 ## Requirements
