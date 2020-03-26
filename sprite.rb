@@ -17,9 +17,6 @@ end
 def spriteFreakOut
     puts "ヽ(°〇°)ﾉ"
 end
-# def spriteSad
-#     ""    puts "╰(▔∀▔)╯"
-# end
 
 def spriteQuote 
     koaray = [" (；￣Д￣)"," (￣□￣」)", " (＃￣0￣)", " (눈_눈)", "╰(▔∀▔)╯", "<(￣︶￣)>", "(＃￣0￣)"]

@@ -47,6 +47,10 @@ def main (userName) # Aaron
             puts `clear`
             covid_updates()
         elsif userChoice == "LET ME OUT!!!"
+            puts `clear`
+            puts "Ohh... owkay.. sowwy..."
+            puts "(╥﹏╥)"
+            sleep(5)
             break
         end
     end
@@ -94,7 +98,7 @@ def exersizes() # Vicky
     
 end
 
-def get_time()
+def get_time() # Team Work
     time = Time.new
     return time.strftime("Today is %A, %d of %B, %Y.")  
 end
@@ -194,19 +198,22 @@ def companion() # Matt
 
     puts box 
     puts spriteQuote
-    sleep(5)
+    sleep(8)
 end
 
 puts `clear`
-puts "Hello! It looks like you're in isolation..."
+puts "Ech hem... *clears throat*"
+sleep(5)
+puts `clear`
+puts "Hewwo! It looks like you're in isowation..."
 spriteSad()
 sleep(4)
 puts `clear`
-puts "I'm here to get you through the day! Let's be friends!"
+puts "I'm here to get you through the day! Let's be fwends!"
 spriteHappy()
 sleep(4)
 puts `clear`
-puts "What is your name, friend?"
+puts "What is your name, fwend?"
 spriteConfused()
 userName = gets.chomp
 main(userName)
