@@ -55,43 +55,43 @@ end
 
 def exersizes() # Vicky    
     exersizes_hash = {
-        "15_mins" => {"sit-up" => "15 reps_3times",
-                    "crunch" => "15 reps_3times", 
-                    "push-up" => "20 reps_3times"
+        "15_mins" => {"Sit Ups" => "15 reps 3 times",
+                    "Crunch" => "15 reps 3 times", 
+                    "Push Ups" => "20 reps 3 times"
         },
-        "20_mins" => {"froger" => "18 reps_4 times",
-                      "bird-dog-crunch"=>"20 reps_4 times",
-                      "point-toe-touch" => "20 each side",
+        "20_mins" => {"Frogger" => "18 reps 4 times",
+                      "Bird-dog-crunch"=>"20 reps 4 times",
+                      "Point-toe-touch" => "20 each side",
         },
-        "30_mins" => {"run-on-stairs" => "100_step",
-                    "frog_jump" => "100",
-                    "skip" =>"100",
+        "30_mins" => {"Stair Climb" => "100 steps",
+                    "Frog jumps" => "100 reps",
+                    "Skip" =>"10 minutes",
         }
     }
-    puts "How long do you want to do your excersice? (15 minutes, 20 minutes, 30 minutes)"
-    beautiful_monster = gets.chomp
+    exerciseChoice = TTY::Prompt.new
+    beautiful_monster = exerciseChoice.select("How long do you want to do your exercise?~", ["15 minutes", "20 minutes", "30 minutes"])
+
 
     if beautiful_monster == "15 minutes"
-            # puts "Well start, you are on good track! please follow the instruction: " + exersizes_hash["15_mins"].to_s
-            exersizes_hash["15_mins"].each do |key, value|
-                puts "Do " + key.to_s + " for " + value.to_s
-            end
+        puts "Okay! Write this down!!~"
+        exersizes_hash["15_mins"].each do |key, value|
+            puts "Do " + key.to_s + " for " + value.to_s
+        end
+        sleep(20)
     elsif beautiful_monster == "20 minutes"
-            exersizes_hash["20_mins"].each do |key,value|
-                puts "Do " + key.to_s + " for " + value.to_s
-            end
-
+        puts "Okay! Write this down!!~"
+        exersizes_hash["20_mins"].each do |key,value|
+            puts "Do " + key.to_s + " for " + value.to_s
+        end
+        sleep(20)
     elsif beautiful_monster == "30 minutes"
-            exersizes_hash["30_mins"].each do |key,value|
-                puts "Do" + key.to_s + " for " + value.to_s
-            end
+        puts "Okay! Write this down!!~"
+        exersizes_hash["30_mins"].each do |key,value|
+            puts "Do" + key.to_s + " for " + value.to_s
+        end
+        sleep(20)
     end
-# def excersice()
     
-end
-
-def sleep_times() # Vicky
-
 end
 
 def get_time()
@@ -105,7 +105,7 @@ def what_day_is_it() # Matt
     end
     
     print box1  
-    
+    puts spriteDay
     sleep(5)
 end
 
@@ -132,7 +132,7 @@ def covid_updates() # Aaron
     regionChoice = regionChooser.select("Where are you concerned about???~", %w(Australia NSW QLD VIC SA NT WA ACT TAS))
 
     puts `clear`
-    puts "The current statistics of the Coronavirus are as follows!:\n\n"
+    puts TTY::Box.frame "\nThe current statistics of the Coronavirus are as follows!:\n\n"
         if regionChoice == "ACT"
             puts "The latest stats of " + bodyHash["data"]["covid19Stats"][0]["province"] + " are:"
             puts bodyHash["data"]["covid19Stats"][0]["confirmed"].to_s + " confirmed cases,"

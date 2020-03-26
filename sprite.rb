@@ -26,6 +26,10 @@ def spriteQuote
     return koaray[rand(koaray.length)]
 end
 
+def spriteDay
+    dayray = ["٩(◕‿◕｡)۶", "	(¬‿¬ )", "	(￣ヘ￣)", "	┐(‘～` )┌"]
+    return dayray[rand(dayray.length)]
+end
 
 
 
