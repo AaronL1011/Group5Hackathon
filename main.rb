@@ -13,24 +13,41 @@ require 'tty-box'
 require 'tty-prompt'
 
 
-def main () # Aaron
+def main (userName) # Aaron
     mainMenu = TTY::Prompt.new
     puts `clear`
-    puts "Hello! It looks like you're in isolation..."
-    sleep(0.2)
-    spriteSad()
-    sleep(4)
-    puts `clear`
-    puts "I'm here to get you through the day! Let's be friends!"
-    sleep(0.2)
-    spriteHappy()
-    sleep(4)
-    puts `clear`
-    puts "What is your name, friend?"
-    spriteConfused()
-    userName = gets.chomp
-    puts `clear`
-    mainMenu.select("Well, " + userName + ", What can I help you with in this trying time?!~", ["Exercise!", "Help me! I feel so alone...", "I've been inside for so long, what day is it?", "Give me some updates, I'm scared!"])
+    userChoice = mainMenu.select("Well, " + userName + ", What can I help you with in this trying time?!~", ["Exercise!", "Help me! I feel so alone...", "I've been inside for so long, what day is it?", "Give me some updates, I'm scared!", "LET ME OUT!!!"])
+    if userChoice == "Exercise!"
+        puts `clear`
+        puts "Okay!~ Lets get physical!"
+        spriteHappy()
+        sleep(4)
+        puts `clear`
+        exersizes()
+    elsif userChoice == "Help me! I feel so alone..."
+        puts `clear`
+        puts "Oh my poor " + userName + ", let me lift your spirits!!"
+        spriteSad()
+        sleep(4)
+        puts `clear`
+        companion()
+    elsif userChoice == "I've been inside for so long, what day is it?"
+        puts `clear`
+        puts "Its easy to forget how long its been since you've seen the sun!~"
+        spriteConfused()
+        sleep(4)
+        puts `clear`
+        what_day_is_it()
+    elsif userChoice == "Give me some updates, I'm scared!"
+        puts `clear`
+        puts "Oh boy, I'll be honest, its not looking good!~"
+        spriteScared()
+        sleep(4)
+        puts `clear`
+        covid_updates()
+    elsif userChoice == "LET ME OUT!!!"
+        break
+    end
 end
 
 
@@ -78,9 +95,11 @@ end
 def what_day_is_it() # Matt
     time = Time.new
     puts time.strftime("Today is %A, %d of %B, %Y.")  
+    sleep(5)
 end
 
 def covid_updates() # Aaron
+    regionChooser = TTY::Prompt.new
     url = URI("https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?country=Australia")
 
     http = Net::HTTP.new(url.host, url.port)
@@ -99,70 +118,59 @@ def covid_updates() # Aaron
     totalDeaths = bodyHash["data"]["covid19Stats"][0]["deaths"] + bodyHash["data"]["covid19Stats"][1]["deaths"] + bodyHash["data"]["covid19Stats"][2]["deaths"] + bodyHash["data"]["covid19Stats"][3]["deaths"] + bodyHash["data"]["covid19Stats"][4]["deaths"] + bodyHash["data"]["covid19Stats"][4]["deaths"] + bodyHash["data"]["covid19Stats"][5]["deaths"] + bodyHash["data"]["covid19Stats"][6]["deaths"] + bodyHash["data"]["covid19Stats"][7]["deaths"]
     totalRecoveries = bodyHash["data"]["covid19Stats"][0]["recovered"] + bodyHash["data"]["covid19Stats"][1]["recovered"] + bodyHash["data"]["covid19Stats"][2]["recovered"] + bodyHash["data"]["covid19Stats"][3]["recovered"] + bodyHash["data"]["covid19Stats"][4]["recovered"] + bodyHash["data"]["covid19Stats"][4]["recovered"] + bodyHash["data"]["covid19Stats"][5]["recovered"] + bodyHash["data"]["covid19Stats"][6]["recovered"] + bodyHash["data"]["covid19Stats"][7]["recovered"]
 
+    regionChoice = regionChooser.select("Where are you concerned about???~", %w(Australia NSW QLD VIC SA NT WA ACT TAS))
 
-    puts "Where are you concerned about??? (Australia, NSW, QLD, VIC, SA, NT, WA, ACT or TAS)"
-    regionChoice = gets.chomp
     puts `clear`
-    puts "The current statistics of the Coronavirus are as follows!:"
-    validChoice = false
-    while !validChoice
+    puts "The current statistics of the Coronavirus are as follows!:\n\n"
         if regionChoice == "ACT"
             puts "The latest stats of " + bodyHash["data"]["covid19Stats"][0]["province"] + " are:"
             puts bodyHash["data"]["covid19Stats"][0]["confirmed"].to_s + " confirmed cases,"
             puts bodyHash["data"]["covid19Stats"][0]["deaths"].to_s + " deaths,"
             puts "and " + bodyHash["data"]["covid19Stats"][0]["recovered"].to_s + " recoveries!"
-            validChoice = true
         elsif regionChoice == "NSW"
             puts "The latest stats of " + bodyHash["data"]["covid19Stats"][1]["province"] + " are:"
             puts bodyHash["data"]["covid19Stats"][1]["confirmed"].to_s + " confirmed cases,"
             puts bodyHash["data"]["covid19Stats"][1]["deaths"].to_s + " deaths,"
             puts "and " + bodyHash["data"]["covid19Stats"][1]["recovered"].to_s + " recoveries!"
-            validChoice = true
         elsif regionChoice == "NT"
             puts "The latest stats of " + bodyHash["data"]["covid19Stats"][2]["province"] + " are:"
             puts bodyHash["data"]["covid19Stats"][2]["confirmed"].to_s + " confirmed cases,"
             puts bodyHash["data"]["covid19Stats"][2]["deaths"].to_s + " deaths,"
             puts "and " + bodyHash["data"]["covid19Stats"][2]["recovered"].to_s + " recoveries!"
-            validChoice = true
         elsif regionChoice == "QLD"
             puts "The latest stats of " + bodyHash["data"]["covid19Stats"][3]["province"] + " are:"
             puts bodyHash["data"]["covid19Stats"][3]["confirmed"].to_s + " confirmed cases,"
             puts bodyHash["data"]["covid19Stats"][3]["deaths"].to_s + " deaths,"
             puts "and " + bodyHash["data"]["covid19Stats"][3]["recovered"].to_s + " recoveries!"
-            validChoice = true
         elsif regionChoice == "SA"
             puts "The latest stats of " + bodyHash["data"]["covid19Stats"][4]["province"] + " are:"
             puts bodyHash["data"]["covid19Stats"][4]["confirmed"].to_s + " confirmed cases,"
             puts bodyHash["data"]["covid19Stats"][4]["deaths"].to_s + " deaths,"
             puts "and " + bodyHash["data"]["covid19Stats"][4]["recovered"].to_s + " recoveries!"
-            validChoice = true
         elsif regionChoice == "TAS"
             puts "The latest stats of " + bodyHash["data"]["covid19Stats"][5]["province"] + " are:"
             puts bodyHash["data"]["covid19Stats"][5]["confirmed"].to_s + " confirmed cases,"
             puts bodyHash["data"]["covid19Stats"][5]["deaths"].to_s + " deaths,"
             puts "and " + bodyHash["data"]["covid19Stats"][5]["recovered"].to_s + " recoveries!"
-            validChoice = true
         elsif regionChoice == "VIC"
             puts "The latest stats of " + bodyHash["data"]["covid19Stats"][6]["province"] + " are:"
             puts bodyHash["data"]["covid19Stats"][6]["confirmed"].to_s + " confirmed cases,"
             puts bodyHash["data"]["covid19Stats"][6]["deaths"].to_s + " deaths,"
             puts "and " + bodyHash["data"]["covid19Stats"][6]["recovered"].to_s + " recoveries!"
-            validChoice = true
         elsif regionChoice == "WA"
             puts "The latest stats of " + bodyHash["data"]["covid19Stats"][7]["province"] + " are:"
             puts bodyHash["data"]["covid19Stats"][7]["confirmed"].to_s + " confirmed cases,"
             puts bodyHash["data"]["covid19Stats"][7]["deaths"].to_s + " deaths,"
             puts "and " + bodyHash["data"]["covid19Stats"][7]["recovered"].to_s + " recoveries!"
-            validChoice = true
         elsif regionChoice == "Australia"
             puts "Australia has " + totalCases.to_s + " total cases!!!!!!"
             puts totalDeaths.to_s + " total deaths,"
             puts "and " + totalRecoveries.to_s + " total recoveries!"
-            validChoice = true
-        else
-            puts "Please enter a valid choice!~"
         end
-    end
+        spriteFreakOut()
+        sleep(4)
+        puts "If my numbers are incorrect, you can blame Johns Hopkins University (⁄ ⁄•⁄ω⁄•⁄ ⁄)"
+        sleep(10)
 end
 
 def companion() # Matt
@@ -173,8 +181,22 @@ def companion() # Matt
         end
     end
 
-puts box 
-puts spriteQuote
+    puts box 
+    puts spriteQuote
 end
 
-main()
+puts `clear`
+puts "Hello! It looks like you're in isolation..."
+spriteSad()
+sleep(4)
+puts `clear`
+puts "I'm here to get you through the day! Let's be friends!"
+spriteHappy()
+sleep(4)
+puts `clear`
+puts "What is your name, friend?"
+spriteConfused()
+userName = gets.chomp
+while true
+    main(userName)
+end

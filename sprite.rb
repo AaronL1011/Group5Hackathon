@@ -3,17 +3,30 @@ def spriteHappy             # PLACEHOLDER SPRITES FOR TESTING
 end
 
 def spriteConfused
-    puts "ლ(ಠ_ಠ ლ)"
+    puts "ლ(ಠ_ಠ ლ)\n\n"
 end
 
 def spriteSad
     puts "(╯︵╰,)"
 end
 
+def spriteScared
+    puts "	Σ(°△°|||)︴"
+end
+
+def spriteFreakOut
+    puts "ヽ(°〇°)ﾉ"
+end
 # def spriteSad
 #     ""    puts "╰(▔∀▔)╯"
 # end
 
-def spriteQuote
-    puts "(＃￣0￣)"
+def spriteQuote 
+    koaray = [" (；￣Д￣)"," (￣□￣」)", " (＃￣0￣)", " (눈_눈)", "╰(▔∀▔)╯", "<(￣︶￣)>", "(＃￣0￣)"]
+    return koaray[rand(koaray.length)]
 end
+
+
+
+
+ 
