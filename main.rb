@@ -14,39 +14,41 @@ require 'tty-prompt'
 
 
 def main (userName) # Aaron
-    mainMenu = TTY::Prompt.new
-    puts `clear`
-    userChoice = mainMenu.select("Well, " + userName + ", What can I help you with in this trying time?!~", ["Exercise!", "Help me! I feel so alone...", "I've been inside for so long, what day is it?", "Give me some updates, I'm scared!", "LET ME OUT!!!"])
-    if userChoice == "Exercise!"
+    while true
+        mainMenu = TTY::Prompt.new
         puts `clear`
-        puts "Okay!~ Lets get physical!"
-        spriteHappy()
-        sleep(4)
-        puts `clear`
-        exersizes()
-    elsif userChoice == "Help me! I feel so alone..."
-        puts `clear`
-        puts "Oh my poor " + userName + ", let me lift your spirits!!"
-        spriteSad()
-        sleep(4)
-        puts `clear`
-        companion()
-    elsif userChoice == "I've been inside for so long, what day is it?"
-        puts `clear`
-        puts "Its easy to forget how long its been since you've seen the sun!~"
-        spriteConfused()
-        sleep(4)
-        puts `clear`
-        what_day_is_it()
-    elsif userChoice == "Give me some updates, I'm scared!"
-        puts `clear`
-        puts "Oh boy, I'll be honest, its not looking good!~"
-        spriteScared()
-        sleep(4)
-        puts `clear`
-        covid_updates()
-    elsif userChoice == "LET ME OUT!!!"
-        break
+        userChoice = mainMenu.select("Well, " + userName + ", What can I help you with in this trying time?!~", ["Exercise!", "Help me! I feel so alone...", "I've been inside for so long, what day is it?", "Give me some updates, I'm scared!", "LET ME OUT!!!"])
+        if userChoice == "Exercise!"
+            puts `clear`
+            puts "Okay!~ Lets get physical!"
+            spriteHappy()
+            sleep(4)
+            puts `clear`
+            exersizes()
+        elsif userChoice == "Help me! I feel so alone..."
+            puts `clear`
+            puts "Oh my poor " + userName + ", let me lift your spirits!!"
+            spriteSad()
+            sleep(4)
+            puts `clear`
+            companion()
+        elsif userChoice == "I've been inside for so long, what day is it?"
+            puts `clear`
+            puts "Its easy to forget how long its been since you've seen the sun!~"
+            spriteConfused()
+            sleep(4)
+            puts `clear`
+            what_day_is_it()
+        elsif userChoice == "Give me some updates, I'm scared!"
+            puts `clear`
+            puts "Oh boy, I'll be honest, its not looking good!~"
+            spriteScared()
+            sleep(4)
+            puts `clear`
+            covid_updates()
+        elsif userChoice == "LET ME OUT!!!"
+            break
+        end
     end
 end
 
@@ -92,9 +94,18 @@ def sleep_times() # Vicky
 
 end
 
-def what_day_is_it() # Matt
+def get_time()
     time = Time.new
-    puts time.strftime("Today is %A, %d of %B, %Y.")  
+    return time.strftime("Today is %A, %d of %B, %Y.")  
+end
+
+def what_day_is_it() # Matt
+    box1 = TTY::Box.frame(width: 30, height: 5, align: :center, title: 
+    {bottom_left: '──────v'}) do get_time
+    end
+    
+    print box1  
+    
     sleep(5)
 end
 
@@ -183,6 +194,7 @@ def companion() # Matt
 
     puts box 
     puts spriteQuote
+    sleep(5)
 end
 
 puts `clear`
@@ -197,6 +209,4 @@ puts `clear`
 puts "What is your name, friend?"
 spriteConfused()
 userName = gets.chomp
-while true
-    main(userName)
-end
+main(userName)
